@@ -1,0 +1,352 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{bm}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsfonts}
+\usepackage{authblk}
+\usepackage{hyperref}
+\title{PRML Solutions\\C01 Introduction}
+\author{Zhao Yang}
+\affil{Department of Automation, Tsinghua Unversity}
+\date{}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Ex]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\maketitle
+ 
+\begin{exercise}{1.1(*)} %You can use theorem, proposition, exercise, or reflection here.
+    \begin{proof}[Solutions]
+        We have $y(x,\bm{w})=\sum_{j=0}^Mw_jx^j$ and $E(\bm{w})=\frac{1}{2}\sum_{n=1}
+        ^N\{y(x_n,\bm{w})-t_n\}^2$ then differentiate with respect to $w_i$, we obtain
+        \begin{equation}
+            \frac{\partial E}{\partial w_i}=\sum_{n=1}^N(y(x_n,\bm{w})-t_n)x_n^i=0
+        \end{equation}
+        which is equal to $\sum_{n=1}^N\sum_{j=0}^Mw_jx_n^{j+i}=\sum_{n=1}^Nt_nx_n^i$.\\
+        Let $A_{ij}=\sum_{n=1}^Nx_n^{i+j}$ and $T_i=\sum_{n=1}^Nx_n^it_n$, so we get
+        \[
+            \sum_{j=0}^MA_{ij}w_j=T_i
+        \]
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.2(*)}
+    \begin{proof}[Solutions]
+        We have $E(\bm{w})=\frac{1}{2}\sum_{n=1}^N\{y(x_n,\bm{w})-t_n\}^2+\frac{\lambda}{2}
+        \sum_{i=0}^Mw_i^2$ then differentiate with respect to $w_i$, we obtain
+        \begin{equation}
+            \frac{\partial E}{\partial w_i}=\sum_{n=1}^N(y(x_n,\bm{w})-t_n)x_n^i+\lambda 
+            w_i=0
+        \end{equation}
+        which is equal to $\sum_{n=1}^N\sum_{j=0}^Mw_jx_n^{j+i}+\lambda w_i=\sum_{n=1}^N
+        t_nx_n^i$.\\
+        Let $A_{ij}=\sum_{n=1}^Nx_n^{i+j}$ and $T_i=\sum_{n=1}^Nx_n^it_n$, we have
+        \[
+            \sum_{j=0}^MA_{ij}w_j+\lambda w_i=T_i 
+            \]
+        Let $\widetilde{A}_{ij}=A_{ij}+\lambda I_{ij}$, so we get
+        \[
+            \sum_{j=0}^M\widetilde{A}_{ij}w_j=T_i
+            \]
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.3(**)}
+    \begin{proof}[Solutions]
+        Let us denote apples, oranges and limes by \emph{a}, \emph{o} and \emph{l} respectively.
+        \begin{align}
+            p(a)&=p(a|r)p(r)+p(a|b)p(b)+p(a|g)p(g)\nonumber\\
+            &=0.3\times 0.2+0.5\times 0.2+0.3\times 0.6\nonumber\\
+            &=0.34
+        \end{align}
+        and by using Bayes' theorem, we obtain
+        \begin{align}
+            p(g|o)&=\frac{p(o|g)p(g)}{\sum_{x=r,g,b}p(o|x)p(x)}\nonumber\\
+            &=0.5
+        \end{align}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.4(**)}
+    \begin{proof}[Solutions]
+        
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.5(*)}
+    \begin{proof}
+        \begin{align*}
+            \E\lbrack(f(x)-\E f(x))^2\rbrack&=\E\lbrack f^2(x)-2f(x)\E f(x)+\E^2f(x)\rbrack\\
+            &=\E f^2(x)-\E^2f(x)
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.6(*)}
+    \begin{proof}
+        if $x$ and $y$ are independent, we have $p(x,y)=p(x)p(y)$. So we obtain
+        \begin{align*}
+            Cov\lbrack x,y\rbrack&=\E\lbrack xy\rbrack-\E\lbrack x\rbrack\E\lbrack y\rbrack\\
+            &=\iint xyp(x,y)dxdy-\int xp(x)dx\int yp(y)dy\\
+            &=\iint xyp(x)p(y)dxdy-\iint xyp(x)p(y)dxdy\\
+            &=0
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.7(**)}
+    \begin{proof}
+        From Cartesian to polar coordinates, the transformation is defined by
+        \begin{equation*}
+            \begin{split}
+                x&=rcos\theta\\
+                y&=rsin\theta
+            \end{split}
+        \end{equation*}
+        The Jacobian of the change of variables is given by
+        \begin{align*}
+            \frac{\partial(x,y)}{\partial(r,\theta)}&=\begin{vmatrix}
+                \frac{\partial x}{\partial r}&\frac{\partial x}{\partial \theta}\\
+                \frac{\partial y}{\partial r}&\frac{\partial y}{\partial \theta}
+            \end{vmatrix}\\
+            &=\begin{vmatrix}
+                cos\theta & -rsin\theta\\
+                sin\theta & rcos\theta
+            \end{vmatrix}\\
+            &=r
+        \end{align*}
+        So, we have
+        \begin{align*}
+            I^2&=\int_0^{2\pi}\int_0^\infty e^{-\frac{r^2}{2\sigma^2}}rdrd\theta\\
+            &=2\pi\int_0Y\infty e^{-\frac{u}{2\sigma^2}}\frac{1}{2}du\\
+            &=2\pi\sigma^2
+        \end{align*}
+        Thus
+        \[
+            I=(2\pi\sigma^2)^{1/2}
+            \]
+        Finally, we obtain
+        \begin{align*}
+            y&=\int_{-\infty}^{+\infty}\mathcal{N}(x|\mu,\sigma^2)dx\\
+            &=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}
+            {2\sigma^2}}dx\\
+            &=\frac{1}{2\pi\sigma^2}\int_{-\infty}^{+\infty}e^{-\frac{t^2}{2\sigma^2}}dt\\
+            &=\frac{I^2}{2\pi\sigma^2}\\
+            &=1
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.8(**)}
+    \begin{proof}
+        We have
+        \begin{align}
+            \E\lbrack x\rbrack&=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\pi\sigma^2}}
+            e^{-\frac{(x-\mu)^2}{2\sigma^2}}xdx\nonumber\\
+            &=\frac{1}{\sqrt{2\pi\sigma^2}}(\int_{-\infty}^{+\infty}e^{-\frac{(x-\mu)^2}
+            {2\sigma^2}}(x-\mu)dx+\int_{-\infty}^{+\infty}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+            \mu dx)\nonumber\\
+            &=\frac{\mu}{\sqrt{2\pi\sigma^2}}\int_{-\infty}^{+\infty}e^{-\frac{(x-\mu)^2}
+            {2\sigma^2}}dx\nonumber\\
+            &=\mu
+        \end{align}
+        Because we have $\int_{-\infty}^{+\infty}e^{-\frac{(x-\mu)^2}{2\sigma^2}}(x-\mu)^2
+        dx=\sqrt{2\pi\sigma^2}$, then we differentiate both side of uppon with respect to 
+        $\sigma^2$. We obtain
+        \begin{equation}
+            \frac{1}{\sqrt{2\pi\sigma^2}}\int_{-\infty}^{+\infty}e^{-\frac{(x-\mu)^2}
+            {2\sigma^2}}(x-\mu)^2dx=\sigma^2
+        \end{equation}
+        Thus
+        \begin{align*}
+            \E\lbrack x^2\rbrack&=
+            \frac{1}{\sqrt{2\pi\sigma^2}}\int_{-\infty}^{+\infty}e^{-\frac{(x-\mu)^2}
+            {2\sigma^2}}\lbrack(x-\mu)^2+2x\mu-\mu^2\rbrack dx\\
+            &=\sigma^2+2\mu^2-\mu^2\\
+            &=\sigma^2+\mu^2
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.9(*)}
+    \begin{proof}[Solutions]
+        We simply differentiate it with respect to $x$ to obtain
+        \begin{equation}
+            \frac{d}{dx}\mathcal{N}(x|\mu,\sigma^2)=-\mathcal{N}(x|\mu,\sigma^2)\frac{x-\mu}
+            {\sigma^2}=0
+        \end{equation}
+        Thus $x=\mu$. 
+        Similarly, we obtain
+        \begin{equation}
+            \frac{\partial}{\partial\bm{x}}\mathcal{N}(\bm{x}|\bm{\mu},\bm{\Sigma})=
+            -\mathcal{N}(\bm{x}|\bm{\mu},\bm{\Sigma})\bm{\Sigma^{-1}}(\bm{x}-\bm{\mu})
+        \end{equation}
+        Thus $\bm{x}=\bm{\mu}$
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.10(*)}
+    \begin{proof}[Solutions]
+        Because of the independence, we have $p(x,z)=p(x)p(z)$. Thus
+        \begin{align*}
+            \E\lbrack x+z\rbrack&=\iint(x+z)p(x,z)dxdz\\
+            &=\iint(x+z)p(x)p(z)dxdz\\
+            &=\int xp(x)dx+\int zp(z)dz\\
+            &=\E\lbrack x\rbrack+\E\lbrack z\rbrack
+        \end{align*}
+        Similarly, for variance, we have
+        \begin{align*}
+            Var\lbrack x+z\rbrack&=\E\lbrack \{x+z-\E\lbrack x+z\rbrack\}^2\rbrack\\
+            &=\iint\{x+z-\E\lbrack x+z\rbrack\}^2p(x)p(z)dxdz\\
+            &=\iint\{x+z-\E\lbrack x\rbrack-\E\lbrack z\rbrack\}^2p(x)p(z)dxdz\\
+            &=\int(x-\E x)^2p(x)dx+\int(z-\E z)^2p(z)dz+\\
+            &2\iint(x-\E x)(z-\E z)p(x)p(z)dxdz\\
+            &=Var\lbrack x\rbrack+Var\lbrack z\rbrack
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.11(*)}
+    \begin{proof}[Solutions]
+        Too trival to do it.
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.12(**)}
+    \begin{proof}[Solutions]
+        If $n=m$, we obtain $\E\lbrack x_nx_m\rbrack=\E\lbrack x_n^2\rbrack=\mu^2+\sigma^2$.
+        If $n\neq m$, we obtain $\E\lbrack x_n\rbrack\E\lbrack x_m\rbrack=\mu^2$.
+        Thus
+        \begin{equation}
+            \E\lbrack \mu_{ML}\rbrack=\frac{1}{N}\sum_{n=1}^{N}\E\lbrack x_n\rbrack=\mu
+        \end{equation}
+        and
+        \begin{align}
+            \E\lbrack \sigma^2_{ML}\rbrack&=\frac{1}{N}\sum_{n=1}^N\E\lbrack(x_n-\mu_{ML})^2
+            \rbrack\nonumber\\
+            &=\frac{1}{N}\sum_{n=1}^N\E\lbrack x_n^2-2\frac{x_n}{N}\sum_{i=1}^{N}x_i+
+            \frac{1}{N^2}(\sum_{i=1}^Nx_i)^2\rbrack\nonumber\\
+            &=\Big(\frac{N-1}{N}\Big)\sigma^2
+        \end{align}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.13(*)}
+    \begin{proof}
+        \begin{align*}
+            \sigma^2_{ML}&=\frac{1}{N}\sum_{n=1}^N(x_n-\mu)^2\\
+            \E\lbrack \sigma^2_{ML}\rbrack&=\frac{1}{N}\sum_{n=1}^N\E\lbrack x_n^2-2\mu x_n+
+            \mu^2\rbrack\\
+            &=\frac{1}{N}\sum_{n=1}^N(\mu^2+\sigma^2-2\mu^2+\mu^2)\\
+            &=\sigma^2
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.14(*)}
+    \begin{proof}
+        We want to rewrite the $\bm{w}$ as $\bm{w}=\bm{w}^S+\bm{w}^A$ where $\bm{w}^S$ satisfy
+        $\bm{w}^S=(\bm{w}^S)^T$ and $\bm{w}^A=-(\bm{w}^A)^T$. So we have
+        \begin{align*}
+            &\bm{w}^T=(\bm{w}^S)^T+(\bm{w}^A)^T\\
+            &\bm{w}=\bm{w}^S+\bm{w}^A
+        \end{align*}
+        Thus
+        \begin{align*}
+            &\bm{w}^S=\frac{\bm{w}+\bm{w}^T}{2}\\
+            &\bm{w}^A=\frac{\bm{w}-\bm{w}^T}{2}
+        \end{align*}
+        So
+        \begin{align*}
+            \sum_{i=1}^D\sum_{j=1}^Dw_{ij}^Sx_ix_j&=\sum_{i=1}^D\sum_{j=1}^D\frac{w_{ij}+w_{ji}}
+            {2}x_ix_j\\
+            &=\frac{1}{2}\sum_{i=1}^D\sum_{j=1}^Dw_{ij}x_ix_j+\frac{1}{2}\sum_{i=1}^D
+            \sum_{j=1}^Dw_{ji}x_ix_j\\
+            &=\sum_{i=1}^D\sum_{j=1}^Dw_{ij}x_ix_j
+        \end{align*}
+        Thus, the number of independent parameters in the matrix $w_{ij}^S$ is 
+        \begin{equation}
+            \label{eq1}
+            num(i.d)=\frac{D^2-D}{2}+D=\frac{D(D+1)}{2}
+        \end{equation}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.15(***)}
+    \begin{proof}
+        \begin{align*}
+            n(D,M)&=\sum_{i_1=1}^D\sum_{i_2=1}^{i_1}\cdots\sum_{i_M=1}^{i_{M-1}}1\\
+            &=\sum_{i_1=1}^D\{\sum_{i_2=1}^{i_1}\cdots\sum_{i_M=1}^{i_{M-1}}1\}\\
+            &=\sum_{i_1=1}^Dn(i_1,M-1)
+        \end{align*}
+        Then use proof by induction to show that the following result holds
+        \[
+            \sum_{i=1}^D\frac{(i+M-2)!}{(i-1)!(M-1)!}=\frac{(D+M-1)!}{(D-1)!M!}
+            \]
+        If $D=1$, it is simple to show that the result holds.\\
+        If $D=k$, we assume the result holds.\\
+        If $D=k+1$, we obtain
+        \begin{align*}
+            \sum_{i=1}^{k+1}\frac{(i+M-2)!}{(i-1)!(M-1)!}&=\sum_{i=1}^k\frac{(i+M-2)!}
+            {(i-1)!(M-1)!}+\frac{(k+M-1)!}{k!(M-1)!}\\
+            &=\frac{(k+M-1)!}{(k-1)!M!}+\frac{(k+M-1)!}{k!(M-1)!}\\
+            &=\frac{(k+M)!}{k!M!}
+        \end{align*}
+        so the equation is proved.\\
+        Finally, we want to prove the following result holds
+        \[
+            n(D,M)=\frac{(D+M-1)!}{(D-1)!M!}
+            \]
+        If $M=2$, we have $n(D,2)=\frac{D(D+1)}{2}$ which is proved in equation \ref{eq1}.\\
+        We assume that when $M=k$, the equation holds.
+        If $M=k+1$, we obtain
+        \begin{align*}
+            n(D,k+1)&=\sum_{i=1}^Dn(i,k)\\
+            &=\sum_{i=1}^D\frac{(i+M-1)!}{(i-1)!M!}\\
+            &=\frac{(D+M)!}{(D-1)!(M+1)!}
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.16(***)}
+    If $M=0$, for all $D$, we have $N(D,0)=1$, which is obviously true.\\
+    We assume that when $M=k$, the equation holds.\\
+    If $M=k+1$, we have
+    \begin{align*}
+        N(D,k+1)&=\sum_{m=0}^kn(D,m)+n(D,k+1)\\
+        &=N(D,k)+n(D,k+1)\\
+        &=\frac{(D+k)!}{D!k!}+\frac{(D+k)!}{(D-1)!(k+1)!}\\
+        &=\frac{(D+k+1)!}{D!(k+1)!}
+    \end{align*}
+    Thus, if $D\gg M$, we have
+    \begin{align*}
+        N(D,M)&=\frac{(D+M)!}{D!M!}\\
+        &\simeq \frac{(D+M)^{D+M}e^{-(D+M)}}{D^De^{-D}M!}\\
+        &=D^M(1+\frac{M}{D})^{D+M}\frac{e^{-M}}{M!}\\
+        &\simeq D^M(1+M+\frac{M^2}{D})\frac{e^{-M}}{M!}
+    \end{align*}
+    which grows like $D^M$
+\end{exercise}
+\begin{exercise}{1.17(**)}
+    First, we prove $\Gamma(x+1)=x\Gamma(x)$.
+    \begin{align*}
+        \Gamma(x+1)&=\int_0^\infty u^xe^{-u}du\\
+        &=-u^xe^{-u}\Big\vert_0^\infty+\int_0^\infty xu^{x-1}e^{-u}du\\
+        &=0+x\Gamma(x)
+    \end{align*}
+    Second, we obtain
+    \[
+        \Gamma(1)=\int_0^\infty ue^{-u}du=-e^{-u}\Big\vert_0^\infty=1
+        \]
+    Third, if $x\in \mathbb{Z}$, we have
+    \begin{align*}
+        \Gamma(x+1)&=x\Gamma(x)\\
+        &=x(x-1)\Gamma(x-1)\\
+        &\cdots\\
+        &=x!
+    \end{align*}
+\end{exercise}
+\end{document}
