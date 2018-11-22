@@ -130,13 +130,14 @@
         So, we have
         \begin{align*}
             I^2&=\int_0^{2\pi}\int_0^\infty e^{-\frac{r^2}{2\sigma^2}}rdrd\theta\\
-            &=2\pi\int_0Y\infty e^{-\frac{u}{2\sigma^2}}\frac{1}{2}du\\
+            &=2\pi\int_0^\infty e^{-\frac{u}{2\sigma^2}}\frac{1}{2}du\\
             &=2\pi\sigma^2
         \end{align*}
         Thus
-        \[
+        \begin{equation}
+            \label{eqI}
             I=(2\pi\sigma^2)^{1/2}
-            \]
+        \end{equation}
         Finally, we obtain
         \begin{align*}
             y&=\int_{-\infty}^{+\infty}\mathcal{N}(x|\mu,\sigma^2)dx\\
@@ -312,41 +313,76 @@
     \end{proof}
 \end{exercise}
 \begin{exercise}{1.16(***)}
-    If $M=0$, for all $D$, we have $N(D,0)=1$, which is obviously true.\\
-    We assume that when $M=k$, the equation holds.\\
-    If $M=k+1$, we have
-    \begin{align*}
-        N(D,k+1)&=\sum_{m=0}^kn(D,m)+n(D,k+1)\\
-        &=N(D,k)+n(D,k+1)\\
-        &=\frac{(D+k)!}{D!k!}+\frac{(D+k)!}{(D-1)!(k+1)!}\\
-        &=\frac{(D+k+1)!}{D!(k+1)!}
-    \end{align*}
-    Thus, if $D\gg M$, we have
-    \begin{align*}
-        N(D,M)&=\frac{(D+M)!}{D!M!}\\
-        &\simeq \frac{(D+M)^{D+M}e^{-(D+M)}}{D^De^{-D}M!}\\
-        &=D^M(1+\frac{M}{D})^{D+M}\frac{e^{-M}}{M!}\\
-        &\simeq D^M(1+M+\frac{M^2}{D})\frac{e^{-M}}{M!}
-    \end{align*}
-    which grows like $D^M$
+    \begin{proof}
+        If $M=0$, for all $D$, we have $N(D,0)=1$, which is obviously true.\\
+        We assume that when $M=k$, the equation holds.\\
+        If $M=k+1$, we have
+        \begin{align*}
+            N(D,k+1)&=\sum_{m=0}^kn(D,m)+n(D,k+1)\\
+            &=N(D,k)+n(D,k+1)\\
+            &=\frac{(D+k)!}{D!k!}+\frac{(D+k)!}{(D-1)!(k+1)!}\\
+            &=\frac{(D+k+1)!}{D!(k+1)!}
+        \end{align*}
+        Thus, if $D\gg M$, we have
+        \begin{align*}
+            N(D,M)&=\frac{(D+M)!}{D!M!}\\
+            &\simeq \frac{(D+M)^{D+M}e^{-(D+M)}}{D^De^{-D}M!}\\
+            &=D^M(1+\frac{M}{D})^{D+M}\frac{e^{-M}}{M!}\\
+            &\simeq D^M(1+M+\frac{M^2}{D})\frac{e^{-M}}{M!}
+        \end{align*}
+        which grows like $D^M$
+    \end{proof}
 \end{exercise}
 \begin{exercise}{1.17(**)}
-    First, we prove $\Gamma(x+1)=x\Gamma(x)$.
-    \begin{align*}
-        \Gamma(x+1)&=\int_0^\infty u^xe^{-u}du\\
-        &=-u^xe^{-u}\Big\vert_0^\infty+\int_0^\infty xu^{x-1}e^{-u}du\\
-        &=0+x\Gamma(x)
-    \end{align*}
-    Second, we obtain
-    \[
-        \Gamma(1)=\int_0^\infty ue^{-u}du=-e^{-u}\Big\vert_0^\infty=1
+    \begin{proof}
+        First, we prove $\Gamma(x+1)=x\Gamma(x)$.
+        \begin{align*}
+            \Gamma(x+1)&=\int_0^\infty u^xe^{-u}du\\
+            &=-u^xe^{-u}\Big\vert_0^\infty+\int_0^\infty xu^{x-1}e^{-u}du\\
+            &=0+x\Gamma(x)
+        \end{align*}
+        Second, we obtain
+        \[
+            \Gamma(1)=\int_0^\infty ue^{-u}du=-e^{-u}\Big\vert_0^\infty=1
+            \]
+        Third, if $x\in \mathbb{Z}$, we have
+        \begin{align*}
+            \Gamma(x+1)&=x\Gamma(x)\\
+            &=x(x-1)\Gamma(x-1)\\
+            &\cdots\\
+            &=x!
+        \end{align*}
+    \end{proof}
+\end{exercise}
+\begin{exercise}{1.18(**)}
+    \begin{proof}
+        Using the equation \ref{eqI}, we obtain
+        \[
+        \sqrt{2\sigma^2}\int_{-\infty}^{+\infty}e^{-\frac{x^2}{2\sigma^2}}d\frac{x}
+        {\sqrt{2\sigma^2}}=\sqrt{2\pi\sigma^2}
         \]
-    Third, if $x\in \mathbb{Z}$, we have
-    \begin{align*}
-        \Gamma(x+1)&=x\Gamma(x)\\
-        &=x(x-1)\Gamma(x-1)\\
-        &\cdots\\
-        &=x!
-    \end{align*}
+        which is equal to
+        \begin{equation}
+            \label{eq:eint}
+            \int_{-\infty}^{+\infty}e^{-t^2}dt=\sqrt{\pi}
+        \end{equation}
+        Otherwise, using the gamma function, we have 
+        \begin{align}
+            \int_0^\infty e^{-r^2}r^{D-1}dr&=\frac{1}{2}\int_0^\infty
+            e^{-r^2}(r^2)^{D/2-1}dr^2\nonumber\\
+            &=\frac{1}{2}\Gamma\Big(\frac{D}{2}\Big)
+        \end{align}
+        Thus, we obtain
+        \begin{align}
+            S_D&=\frac{\prod_{i=1}^D\int_{-\infty}^{+\infty}e^{-x_i^2}dx_i}
+            {\int_0^\infty e^{-r^2}r^{D-1}dr}\nonumber\\
+            &=\frac{2\sqrt{\pi}^D}{\Gamma(D/2)}
+        \end{align}
+        So, the surface area with radius $r$ in $D$ dimension wil equal to $S_Dr^{D-1}$.\\
+        Thus, we obtain
+        \begin{equation}
+            V_D=\int_0^1S_Dr^{D-1}dr=\frac{S_D}{D}
+        \end{equation}
+    \end{proof}
 \end{exercise}
 \end{document}
