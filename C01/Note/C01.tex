@@ -1,6 +1,7 @@
-\documentclass[UTF8]{article}
+\documentclass[12pt, a4paper]{article}
 % \usepackage{ctex}
-\usepackage{amsmath}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
 \usepackage{bm}
 \usepackage{cases}
 \usepackage{graphicx}
@@ -8,8 +9,8 @@
 \usepackage{amsfonts}
 \usepackage{authblk}
 \title{PRML Note\\C01 Introduction}
-\author{Zhao Yang}
-\affil{Department of Automation, Tsinghua Unversity}
+\author{Yang Zhao}
+\affil{Department of Automation, Tsinghua University}
 \date{}
 
 \begin{document}
@@ -279,10 +280,11 @@
         \end{align*}
         \item Calculus of Variations: if $J(y)=\int_{x_1}^{x_2}\mathcal{L}(x,y(x),y'(x))dx$, 
         we have 
-        \[
+        \begin{equation}
+            \label{CalculusVariations}
             \frac{\partial J(y)}{\partial y}=\frac{\partial\mathcal{L}}{\partial f}-\frac{d}{dx}
             \frac{\partial\mathcal{L}}{\partial f'}
-            \]
+        \end{equation}
         which is called Euler-Lagrange Equation.
         \item Incuring a Loss function $\mathcal{L}(t,y(\bm{x}))$, the average, or expected, 
         loss is given by
@@ -375,5 +377,53 @@
         Note that $I\lbrack x,y\rbrack\geq 0$ with equality, if and only if $x$ and $y$ are independent
         and we have $I\lbrack x,y\rbrack=H\lbrack x\rbrack-H\lbrack x|y\rbrack
         =\lbrack y\rbrack-H\lbrack y|x\rbrack$
+    \end{itemize}
+    \section{Appendix}
+    \begin{itemize}
+        \item To get the Euler-Lagrange equation\ref{CalculusVariations}, consider the function
+        \begin{equation*}
+            J(y)=\int_{x_1}^{x_2}L(x,y(x),y'(x))dx
+        \end{equation*}
+        where
+        $x_1,x_2$ are constants, $y(x)$ is twice continuously differentiable, $y'(x)=dy/dx$, 
+        $L(x,y(x),y'(x))$ is twice continuously differentiable with respect to its arguments $x,y,y'$.
+        If the funtion $J(y)$ attains a local minimum at $f$, and $\eta$ is an arbitrary function 
+        that has at least one derivative and vanishes at the endpoints $x_1$ and $x_2$, then for any 
+        number $\epsilon$ close to 0,
+        \begin{equation*}
+            J(f)\le J(f+\epsilon\eta)
+        \end{equation*}
+        Let $\Phi(\epsilon)=J(f+\epsilon\eta)$, and the function $\Phi(\epsilon)$ has a minimum at
+        $\epsilon=0$, thus
+        \begin{equation*}
+            \Phi'(0)=\frac{d\Phi}{d\epsilon}\Big\vert_{\epsilon=0}=\int_{x_1}^{x_2}\frac{dL}
+            {d\epsilon}\Big\vert_{\epsilon=0}dx=0
+        \end{equation*}
+        Using the total derivative of $L(x,y,y')$
+        \begin{equation*}
+            \frac{dL}{d\epsilon}=\frac{\partial L}{\partial y}\frac{dy}{d\epsilon}+
+            \frac{\partial L}{\partial y'}\frac{dy'}{d\epsilon}=\frac{\partial L}{\partial y}\eta
+            +\frac{\partial L}{\partial y'}\eta'
+        \end{equation*}
+        So,
+        \begin{equation*}
+            \frac{dL}{d\epsilon}\Big\vert_{\epsilon=0}=\frac{\partial L}{\partial f}\eta
+            +\frac{\partial L}{\partial f'}\eta'
+        \end{equation*}
+        $\eta=0$ at $x_1$ and $x_2$ by definition, therefore,
+        \begin{align*}
+            \int_{x_1}^{x_2}\frac{dL}{d\epsilon}\Big\vert_{\epsilon=0}dx=&\int_{x_1}^{x_2}\Big
+            (\frac{\partial L}{\partial f}\eta+\frac{\partial L}{\partial f'}\eta'\Big)dx\\
+            =&\int_{x_1}^{x_2}\Big(\frac{\partial L}{\partial f}\eta+\frac{d}{dx}\Big(\frac{\partial L}
+            {\partial f'}\eta\Big)-\eta\frac{d}{dx}\frac{\partial L}{\partial f'}\Big)dx\\
+            =&\int_{x_1}^{x_2}\Big(\frac{\partial L}{\partial f}\eta-\eta\frac{d}{dx}\frac{\partial L}
+            {\partial f'}\Big)dx+\frac{\partial L}{\partial f'}\eta\Big\vert_{x_1}^{x_2}\\
+            =&\int_{x_1}^{x_2}\eta\Big(\frac{\partial L}{\partial f}-\frac{d}{dx}\frac{\partial L}
+            {\partial f'}\Big)dx=0
+        \end{align*}
+        For $\eta$ is the arbitrary function, so we have
+        \begin{equation}
+            \frac{\partial L}{\partial f}-\frac{d}{dx}\frac{\partial L}{\partial f'}=0
+        \end{equation}
     \end{itemize}
 \end{document} 
