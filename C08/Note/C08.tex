@@ -85,7 +85,25 @@
         \end{equation*}
         This key equation expresses the \textit{factorization} properties of the joint 
         distribution for a directed graphical model.
-        \begin{figure}[!t]
+        \item Three cases of 3-node graph, which is shown as the figure \ref{fig:threecases}.
+        \begin{itemize}
+            \item For figure \ref{fig_first_case}, if node $c$ is observed, node $a$ is independent 
+            with node $b$.
+            \begin{equation*}
+                p(a,b|c)=p(a|c)p(b|c)
+            \end{equation*}
+            \item For figure \ref{fig_second_case}, if node $c$ is observed, node $a$ is independent
+            with node $b$.
+            \begin{equation*}
+                p(a,b|c)=p(a|c)p(b|c)
+            \end{equation*}
+            \item For figure \ref{fig_third_case}, if node $c$ isn't observed, 
+            node $a$ is independent with node $b$. This case is also called the \textit{v-structure}.
+            \begin{equation*}
+                p(a,b|c)\neq p(a|c)p(b|c)
+            \end{equation*}
+        \end{itemize}
+        \begin{figure}[htbp]
             \centering
             \subfloat[]{\includegraphics[width=2in]{figures/tail2tail.PNG}
             \label{fig_first_case}}
