@@ -121,10 +121,53 @@
             is said to be head-to-head with respect to the path from node $a$ to $b$.}
             \label{fig:threecases}
         \end{figure}
+        \item \textit{The blocked path}. Any path is said to be blocked if it includes a node such that 
+        either \begin{itemize}
+            \item[a] the arrows on the path meet either head-to-tail or tail-to-tail at the node, and
+            the node is observed, or
+            \item[b] the arrows meet head-to-head at the node, and neither the node, nor any of its 
+            descendants, is observed.  
+        \end{itemize}
+        \item \textit{D-separation}. Consider a general directed graph in which $A$, $B$ and $C$ are 
+        arbitrary nonintersecting sets of nodes. If all paths from any node in $A$ to any node in 
+        $B$ are blocked, then $A$ is said to be D-separation from $B$ by $C$ and we have 
+        $A\perp B|C$.
+        \item \textit{Markov blanket}. For directed graph, the Markov blanket of a node comprises the set of 
+        parents, children and co-parents of the node. Denote the Markov blanket of a node $x_i$ with 
+        $Mb(x_i)$ and we have $x_k\perp x_i|Mb(x_i)$, where $x_k$ is any node except $x_i$ and 
+        $Mb(x_i)$.
     \end{itemize}
 
-
-    \section{Conditional Independence}
     \section{Markov Random Fields}
+    \begin{itemize}
+        \item A Markov Random Field, also known as a Markov network or an undirected graphical model, 
+        has a set of nodes and undirected edges.
+        \item The Markov blanket of an undirected graph is the set of all neighbouring nodes because 
+        a node will be conditionally independent of all other nodes conditioned only on the 
+        neighbouring nodes.
+        \item Factorization properties of Markov random fields. Let us denote a clique by $C$ and the 
+        set of variables in that clique by $\bm{x}_C$. Then the joint distribution is written as a 
+        product of potential functions $\psi_C(\bm{x}_C)$ over the maximal cliques of the graph
+        \begin{equation*}
+            p(\bm{x})=\frac{1}{Z}\prod_C\psi_C(\bm{x}_C)
+        \end{equation*}
+        where the $Z$, called the partition function, is a normalization constant and is given by 
+        \begin{equation*}
+            Z=\sum_{\bm{x}}\prod_C\psi_C(\bm{x}_C)
+        \end{equation*}
+        \item The presence of the normalization constant is one of the major limitations of undirected 
+        graphs. The partition function is needed for parameter learning because it will be a function of 
+        any parameters that govern the potential functions $\psi_C(\bm{x}_C)$.
+        \item It is convenient to express them as exponentials, so that
+        \begin{equation*}
+            \psi_C(\bm{x}_C)=exp\{-E(\bm{x}_C)\}
+        \end{equation*}
+        where $E(\bm{x}_C)$ is called an energy function, and the exponential representation is called the 
+        Boltzmann distribution. 
+    \end{itemize}
     \section{Inference in Graphical Models}
+    \begin{itemize}
+        \item \textit{Inference}. The task of inference is that we know all the parameters of the model and
+        caculate the marginal probability and the conditional probability. 
+    \end{itemize}
 \end{document}
