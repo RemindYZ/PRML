@@ -180,5 +180,31 @@
             ln p(\mathbf{X}|\bm{\theta})=ln\Big\{\sum_{\mathbf{Z}}p(\mathbf{X},
             \mathbf{Z}|\bm{\theta}) \Big\}
         \end{equation}
+        \item The presence of the sum prevents the logarithm from acting directly on the 
+        joint distribution, resulting in complicated expressions for the maximum likelihood
+        solution. 
+        \item \textit{The General EM Algorithm}. \begin{enumerate}
+            \item Choose an initial setting for the parameters $\bm{\theta}^{old}$.
+            \item \textbf{E Step}. Evaluate $p(\mathbf{Z}|\mathbf{X},\bm{\theta}^{old})$.
+            \item \textbf{M Step}. Evaluate $\bm{\theta}^{new}$ given by 
+            \begin{equation*}
+                \bm{\theta}^{new}=argmax_{\bm{\theta}} Q(\bm{\theta},\bm{\theta}^{old})
+            \end{equation*}
+            where \begin{equation*}
+                Q(\bm{\theta},\bm{\theta}^{old})=\sum_{\mathbf{Z}}p(\mathbf{Z}|\mathbf{X},
+                \bm{\theta}^{old})ln p(\mathbf{X},\mathbf{Z}|\bm{\theta})
+            \end{equation*}
+            \item Check for convergence of either the log likelihood or the parameters values.
+            If the convergence criterion is not satisfied, then let
+            \begin{equation*}
+                \bm{\theta}^{old}\leftarrow\bm{\theta}^{new}
+            \end{equation*}
+            and return to step 2. 
+        \end{enumerate}
+        \item The EM algorithm can also be used to find MAP solutions for models in which a 
+        prior $p(\bm{\theta})$ is defined over the parameters. In this case the E step remains
+        the same as in the maximum likelihood case, whereas in the M step the quantity to be 
+        maximized is given by $Q(\bm{\theta},\bm{\theta}^{old})+lnp(\bm{\theta})$. Suitable 
+        choices for the prior will remove the singularities. 
     \end{itemize}
 \end{document}
