@@ -206,5 +206,20 @@
         the same as in the maximum likelihood case, whereas in the M step the quantity to be 
         maximized is given by $Q(\bm{\theta},\bm{\theta}^{old})+lnp(\bm{\theta})$. Suitable 
         choices for the prior will remove the singularities. 
+        \item Consider the problem of maximizing the likelihood for the complete data set 
+        $\{\mathbf{X},\mathbf{Z}\}$. This likelihood function takes the form
+        \begin{equation}
+            p(\mathbf{X},\mathbf{Z}|\bm{\mu},\mathbf{\Sigma},\bm{\pi})=
+            \prod_{n=1}^N\prod_{k=1}^K\pi^{z_{nk}}_k\N(\bm{x}_n|\bm{\mu}_k,
+            \mathbf{\Sigma}_k)^{z_{nk}}
+        \end{equation}
+        where $z_{nk}$ denotes the $k^{th}$ component of $\bm{z}_n$. Taking the logarithm, we
+        obtain
+        \begin{equation}
+            lnp(\mathbf{X},\mathbf{Z}|\bm{\mu},\mathbf{\Sigma},\bm{\pi})=
+            \sum_{n=1}^N\sum_{k=1}^Kz_{nk}\{ln\pi_k+ln\N(\bm{x}_n|\bm{\mu}_k,\mathbf{\Sigma}_k)\}
+        \end{equation}
+        Comparision with the log likelihood function (\ref{eq:MLEforGM}) for the incomplete data
+        shows that summation over $k$ and the logarithm have been interchanged. 
     \end{itemize}
 \end{document}
